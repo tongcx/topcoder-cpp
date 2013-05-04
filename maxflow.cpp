@@ -11,7 +11,7 @@ typedef vector<int> vi;
 // Max Flow! - Dinic O(n^2 * m) incremental
 struct MaxFlow {
   int n;    // n is number of nodes
-  vi dest, cap, flow, a, curAdj;// use SZ(dest) as nar (including back arcs)
+  vi dest, cap, flow, d, curAdj;// use SZ(dest) as nar (including back arcs)
   vector<vi> adj;
 
   MaxFlow(int n = 0):n(n) {adj.resize(n);}
