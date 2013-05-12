@@ -29,7 +29,6 @@ struct segtree {
     else aux[u] = R-L>1 ? aux[2*u+1] + aux[2*u+2] : 0;
   }
 
-  // get the length of covered intervals in [l,r)
   int query(int l, int r) { return query(l, r, 0, 0, n);}
   int query(int l, int r, int u, int L, int R) {
     if (l >= R || r <= L || l >= r) return 0;
