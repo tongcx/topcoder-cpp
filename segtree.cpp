@@ -1,6 +1,4 @@
 #include <vector>
-#include <iostream>
-#include <algorithm>
 using namespace std;
 typedef vector<int> vi;
 
