@@ -5,6 +5,7 @@ typedef vector<int> vi;
 // use [val] to store intrinsic values
 // use [aux] to store update info
 // this verison implements length of covered intervals
+// Can be implemented for BIT, RMQ
 struct segtree {
   vi val, aux;
   int n;
