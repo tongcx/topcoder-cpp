@@ -8,6 +8,9 @@
 using namespace std;
 typedef vector<int> vi;
 
+template<class C> void chmax(C& x, const C& a) { if (x < a) x = a;}
+template<class C> void chmin(C& x, const C& a) { if (x > a) x = a;}
+
 #include <sstream>
 
 template<class C> string to_string(const C& x) {
