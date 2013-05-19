@@ -41,7 +41,7 @@ struct MaxFlow {
 
   int MFdfs(int u, int t, int f) {
     if (u == t) return f;
-    for(int &i = curAdj[u]; i < adj[u].size(); ++i) {
+    for(int &i = curAdj[u]; i < SZ(adj[u]); ++i) {
       int ar = adj[u][i], v = dest[ar];
       if (d[v] != d[u]+1 || capres(ar) == 0) continue;
       int tmpF = MFdfs(v, t, min(f, capres(ar)));
