@@ -1,5 +1,6 @@
 #include <vector>
 #include <string>
+#include <algorithm>
 #define REP(i, n) for (int i = 0; i < n; i++)
 #define EACH(i, c) for (typeof ((c).begin()) i = (c).begin(); i != (c).end(); i++)
 #define SZ(c) int((c).size())
@@ -8,8 +9,8 @@
 using namespace std;
 typedef vector<int> vi;
 
-template<class C> void chmax(C& x, const C& a) { if (x < a) x = a;}
-template<class C> void chmin(C& x, const C& a) { if (x > a) x = a;}
+template<class C> inline void chmax(C& x, const C& a) { if (x < a) x = a;}
+template<class C> inline void chmin(C& x, const C& a) { if (x > a) x = a;}
 
 #include <sstream>
 
