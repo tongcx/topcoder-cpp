@@ -1,11 +1,13 @@
 #include <vector>
 #include <string>
+#include <cstring>
 #include <algorithm>
 #define REP(i, n) for (int i = 0; i < n; i++)
 #define EACH(i, c) for (typeof ((c).begin()) i = (c).begin(); i != (c).end(); i++)
 #define SZ(c) int((c).size())
 #define PB push_back
 #define MP make_pair
+#define MSET(c, v) memset(c, v, sizeof(c))
 using namespace std;
 typedef vector<int> vi;
 typedef long long ll;
