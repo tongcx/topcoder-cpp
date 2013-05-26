@@ -8,6 +8,8 @@
 #define MP make_pair
 using namespace std;
 typedef vector<int> vi;
+typedef long long ll;
+const int INF = 0x3f3f3f3f;
 
 template<class C> inline void chmax(C& x, const C& a) { if (x < a) x = a;}
 template<class C> inline void chmin(C& x, const C& a) { if (x > a) x = a;}
