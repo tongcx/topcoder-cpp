@@ -1,6 +1,4 @@
-#include <vector>
-using namespace std;
-typedef vector<int> vi;
+#include "header.cpp"
 
 // use [val] to store intrinsic values
 // use [aux] to store update info

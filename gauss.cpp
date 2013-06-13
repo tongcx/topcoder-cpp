@@ -1,10 +1,4 @@
-#include <vector>
-#include <algorithm>
-#define REP(i, n) for(int i = 0; i < n; i++)
-using namespace std;
-typedef vector<int> vi;
-
-template<class C> inline C mod(C a, C b) { return (a%b+b)%b;}
+#include "header.cpp"
 
 int euclid(int a, int b, int& x, int& y) {
   if (b == 0) {
@@ -16,6 +10,12 @@ int euclid(int a, int b, int& x, int& y) {
   return res;
 }
 
+int inv(int a, int p) {
+  int x,y;
+  euclid(a, p, x, y);
+  return x;
+}
+
 // LinSys with m eqs and n vars on Z(p)
 // Use A[i][n] as constant term
 struct LinSystem {
@@ -24,11 +24,6 @@ struct LinSystem {
 
   LinSystem(int m, int n, int p) : m(m), n(n), p(p), A(m, vi(n+1)) {}
   inline int reg(int x) { return mod(x, p);}
-  int inv(int a) {
-    int x,y;
-    euclid(a, p, x, y);
-    return x;
-  }
 
   bool solve() {
     REP(i, m) REP(j, n+1) A[i][j] = reg(A[i][j]);
@@ -39,7 +34,7 @@ struct LinSystem {
         break;
       }
       if (A[rank][j] == 0) continue;
-      for (int l = n; l >= j; l--) A[rank][l] = reg(A[rank][l]*inv(A[rank][j]));
+      for (int l = n; l >= j; l--) A[rank][l] = reg(A[rank][l]*inv(A[rank][j], p));
       for (int i = rank+1; i < m; i++) for (int l = n; l >= j; l--)
         A[i][l] = reg(A[i][l]-A[rank][l] * A[i][j]);
       rank++;

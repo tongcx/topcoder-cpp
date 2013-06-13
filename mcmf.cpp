@@ -1,11 +1,5 @@
-#include <vector>
-#include <queue>
-#define REP(i, n) for (int i = 0; i < n; i++)
-#define EACH(i, c) for (typeof ((c).begin()) i = (c).begin(); i != (c).end(); i++)
-#define SZ(c) int((c).size())
-#define PB push_back
-using namespace std;
-typedef vector<int> vi;
+#include "header.cpp"
+
 typedef int cost_type;
 const cost_type CINF = 0x3F3F3F3F;
 
