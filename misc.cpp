@@ -9,7 +9,7 @@
 #define PB push_back
 #define MP make_pair
 #define MSET(c, v) memset(c, v, sizeof(c))
-#define TRACE(x...)
+#define TRACE(x...) x
 #define PRINT(x...) TRACE(printf(x))
 #define WATCH(x) TRACE(cout << #x << " = " << x << endl)
 using namespace std;
