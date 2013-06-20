@@ -19,6 +19,7 @@ typedef vector<int> vi;
 typedef long long ll;
 const int INF = 0x3f3f3f3f;
 
+template<class C> ostream& operator<<(ostream& out, const vector<C>& v) {EACH(x, v) out<<*x<<' '; return out;}
 template<class C> inline void chmax(C& x, const C& a) { if (x < a) x = a;}
 template<class C> inline void chmin(C& x, const C& a) { if (x > a) x = a;}
 template<class C> string to_string(const C& x) {stringstream ss;ss << x;return ss.str();}
