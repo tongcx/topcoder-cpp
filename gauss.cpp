@@ -1,20 +1,6 @@
 #include "header.cpp"
 
-int euclid(int a, int b, int& x, int& y) {
-  if (b == 0) {
-    x = 1; y = 0;
-    return a;
-  }
-  int res = euclid(b, a%b, x, y);
-  int t = x; x = y; y = t - (a/b) * y;
-  return res;
-}
-
-int inv(int a, int p) {
-  int x,y;
-  euclid(a, p, x, y);
-  return x;
-}
+int inv(int a, int p) { return a == 1 ? 1 : ll(p-p/a) * inv(p%a, p) % p;}
 
 // LinSys with m eqs and n vars on Z(p)
 // Use A[i][n] as constant term
