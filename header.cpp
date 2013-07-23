@@ -2,11 +2,12 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cstring>
 #include <algorithm>
 #include <sstream>
 #include <queue>
 #define REP(i, n) for (int i = 0; i < n; i++)
-#define EACH(i, c) for (typeof ((c).begin()) i = (c).begin(); i != (c).end(); i++)
+#define EACH(i, c) for (__typeof__((c).begin()) i = (c).begin(); i != (c).end(); i++)
 #define SZ(c) int((c).size())
 #define PB push_back
 #define MP make_pair
