@@ -21,9 +21,9 @@ struct MaxFlow {
     queue<int> Q; Q.push(ini);
     while (!Q.empty()) {
       int u = Q.front(); Q.pop();
-      EACH(i, adj[u]) {
-        int v = dest[*i];
-        if (capres(*i) > 0 && d[v] == INF) {
+      for(auto i : adj[u]) {
+        int v = dest[i];
+        if (capres(i) > 0 && d[v] == INF) {
           d[v] = d[u] + 1; Q.push(v);
         }
       }

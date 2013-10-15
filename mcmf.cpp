@@ -29,11 +29,11 @@ struct MCMF {
     dist[ini] = 0; q.push(ini); mark[ini] = true;
     while(!q.empty()) {
       int u = q.front(); q.pop(); mark[u] = false;
-      EACH(a, adj[u]) {
-        int v = dest[*a];
-        if (capres(*a) >= delta && dist[v] > dist[u]+cost[*a]) {
-          dist[v] = dist[u]+cost[*a];
-          ent[v] = *a;
+      for(auto a : adj[u]) {
+        int v = dest[a];
+        if (capres(a) >= delta && dist[v] > dist[u]+cost[a]) {
+          dist[v] = dist[u]+cost[a];
+          ent[v] = a;
           if (!mark[v]) { q.push(v); mark[v] = true; }
         }
       }

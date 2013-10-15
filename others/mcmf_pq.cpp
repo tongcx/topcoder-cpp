@@ -1,7 +1,6 @@
 #include <vector>
 #include <queue>
 #define REP(i, n) for (int i = 0; i < n; i++)
-#define EACH(i, c) for (typeof ((c).begin()) i = (c).begin(); i != (c).end(); i++)
 #define SZ(c) int((c).size())
 #define PB push_back
 using namespace std;
@@ -37,11 +36,11 @@ struct MCMF {
     while(!q.empty()) {
       int u = q.top().second; dist[u] = min(dist[u], -q.top().first); q.pop();
       if (mark[u]) continue; mark[u] = true;
-      EACH(a, adj[u]) {
-        int v = dest[*a];
-        if (capres(*a) > 0 && dist[v] > dist[u]+rescost(*a)) {
-          dist[v] = dist[u] + rescost(*a);
-          ent[v] = *a;
+      for(auto a : adj[u]) {
+        int v = dest[a];
+        if (capres(a) > 0 && dist[v] > dist[u]+rescost(a)) {
+          dist[v] = dist[u] + rescost(a);
+          ent[v] = a;
           q.push(make_pair(-dist[v], v));
         }
       }

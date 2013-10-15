@@ -20,18 +20,18 @@ struct Graph {
 
   int dfs_artpbridge(int u, int ent) {
     int nf = 0;
-    EACH(a, adj[u]) {
-      int v = dest[*a];
+    for(auto a : adj[u]) {
+      int v = dest[a];
       if (depth[v] == -1) {
         least[v] = depth[v] = depth[u] + 1;
-        dfs_artpbridge(v, *a); nf++;
+        dfs_artpbridge(v, a); nf++;
 
         if (least[v] >= depth[u]) {
           artp[u] = true;
-          if (least[v] == depth[v]) bridge[*a] = bridge[inv(*a)] = true;
+          if (least[v] == depth[v]) bridge[a] = bridge[inv(a)] = true;
         } else least[u] = min(least[u], least[v]);
       }
-      else if (inv(*a) != ent) least[u] = min(least[u], depth[v]);
+      else if (inv(a) != ent) least[u] = min(least[u], depth[v]);
     }
     return nf;
   }
@@ -55,9 +55,9 @@ struct Graph {
   int transp(int a) { return (a & 0x1); }
 
   void dfs_topsort(int u) {
-    EACH(a, adj[u]) {
-      int v = dest[*a];
-      if (!transp(*a) && depth[v] == -1) {
+    for(auto a : adj[u]) {
+      int v = dest[a];
+      if (!transp(a) && depth[v] == -1) {
         depth[v] = depth[u] + 1;
         dfs_topsort(v);
       }
@@ -67,9 +67,9 @@ struct Graph {
 
   void dfs_compfortcon(int u, int ent) {
     rep[u] = ent;
-    EACH(a, adj[u]) {
-      int v = dest[*a];
-      if (transp(*a) && rep[v] == -1) dfs_compfortcon(v, ent);
+    for(auto a : adj[u]) {
+      int v = dest[a];
+      if (transp(a) && rep[v] == -1) dfs_compfortcon(v, ent);
     }
   }
 
