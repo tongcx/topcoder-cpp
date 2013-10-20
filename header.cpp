@@ -21,14 +21,14 @@ typedef long long ll;
 const int INF = 0x3f3f3f3f;
 
 namespace std {
-	template<class T> struct hash<vector<T> > {
-		hash<T> fn;
-		size_t operator()(const vector<T>& v) const {
-			size_t seed = 0;
-			for (auto x : v) seed ^= fn(x) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-			return seed;
-		}
-	};
+  template<class T> struct hash<vector<T> > {
+    hash<T> fn;
+    size_t operator()(const vector<T>& v) const {
+      size_t seed = 0;
+      for (auto x : v) seed ^= fn(x) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+      return seed;
+    }
+  };
 }
 
 template<class C> ostream& operator<<(ostream& out, const vector<C>& v) {for(auto x : v) out<<x<<' '; return out;}
