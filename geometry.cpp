@@ -25,7 +25,6 @@ bool seg_intersect(point p, point q, point r, point s) {
   return t != 0 && t != 4;
 }
 
-
 double seg_distance(point p, point q, point r) {
   point A = r - q, B = r - p, C = q - p;
   double a = dot(A, A), b = dot(B, B), c = dot(C, C);
