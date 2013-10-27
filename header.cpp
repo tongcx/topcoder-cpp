@@ -5,6 +5,7 @@
 #include <cstring>
 #include <algorithm>
 #include <sstream>
+#include <map>
 #include <queue>
 #define REP(i, n) for (int i = 0; i < n; i++)
 #define SZ(c) int((c).size())
@@ -31,7 +32,9 @@ namespace std {
   };
 }
 
-template<class C> ostream& operator<<(ostream& out, const vector<C>& v) {for(auto x : v) out<<x<<' '; return out;}
+template<class K, class V> ostream& operator<<(ostream& out, const pair<K,V>& v) { out<<'('<<v.first<<','<<v.second<<')'; return out;}
+template<class C, class=typename C::iterator> struct _cprint { using type = void;}; template<> struct _cprint<string> {};
+template<class C, class=typename _cprint<C>::type> ostream& operator<<(ostream& out, const C& v) {for(auto x : v) out<<x<<' '; return out;}
 template<class C> inline void chmax(C& x, const C& a) { if (x < a) x = a;}
 template<class C> inline void chmin(C& x, const C& a) { if (x > a) x = a;}
 template<class C> string to_string(const C& x) {stringstream ss;ss << x;return ss.str();}
