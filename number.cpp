@@ -1,13 +1,14 @@
 #include "header.cpp"
 
-ll bezout(ll a, ll b, ll& x, ll& y) {
-  if (b == 0) return x=1,y=0,a;
-  ll res = bezout(b, a%b, x, y), t = x;
-  return x = y, y = t - (a/b) * y, res;
+// no need to worry about overflow, |x| <= |b| and |y| <= |a| is an invariant
+template<class I> void bezout(I a, I b, I& x, I& y) {
+  I t;
+  if (b == 0) x=1,y=0;
+  else bezout(b, a%b, x, y), t = x, x = y, y = t - (a/b) * y;
 }
 
-ll crt(ll p, ll a, ll q, ll b) {
-  ll m = p*q, x, y;
+template<class I> I crt(I p, I a, I q, I b) {
+  I m = p*q, x, y;
   bezout(p, q, x, y);
-  return mod(mod(a*y,m)*q+mod(b*x,m)*p,m);
+  return mod(a*y%m*q+b*x%m*p,m);
 }
