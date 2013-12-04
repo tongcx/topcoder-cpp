@@ -15,7 +15,7 @@
 #define MSET(c, v) memset(c, v, sizeof(c))
 #define TRACE(x...) x
 #define PRINT(x...) TRACE(printf(x))
-#define WATCH(x) TRACE(cout << #x << " = " << (x) << endl)
+#define WATCH(x) TRACE({auto _ = (x); cout << #x << " = " << _ << endl;})
 using namespace std;
 typedef vector<int> vi;
 typedef long long ll;
