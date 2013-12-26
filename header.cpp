@@ -17,8 +17,9 @@
 #define PRINT(x...) TRACE(fprintf(stderr, x))
 #define WATCH(x) TRACE({auto _VAL = (x); cerr << #x << " = " << _VAL << endl;})
 using namespace std;
-typedef vector<int> vi;
-typedef long long ll;
+using ll = long long;
+using vi = vector<int>;
+using vl = vector<ll>;
 const int INF = 0x3f3f3f3f;
 
 template<class K, class V> ostream& operator<<(ostream& out, const pair<K,V>& v) { out<<'('<<v.first<<','<<v.second<<')'; return out;}
