@@ -9,6 +9,8 @@
 #include <queue>
 #include <cstdio>
 #include <iostream>
+#include <complex>
+#include <cassert>
 #define REP(i, n) for (int i = 0; i < n; i++)
 #define SZ(c) int((c).size())
 #define MSET(c, v) memset(c, v, sizeof(c))
@@ -21,6 +23,8 @@ using namespace std;
 using ll = long long;
 using vi = vector<int>;
 using vl = vector<ll>;
+using vd = vector<double>;
+using point = complex<double>;
 const int INF = 0x3f3f3f3f;
 
 template<class K, class V> ostream& operator<<(ostream& out, const pair<K,V>& v) { out<<'('<<v.first<<','<<v.second<<')'; return out;}

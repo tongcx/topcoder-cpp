@@ -1,10 +1,8 @@
 #include "header.cpp"
-#include <complex>
 
 int cmp(double a, double b = 0, const double eps = 1e-8) { return a-b>eps ? 1 : b-a>eps ? -1 : 0;}
 
 // we use complex<double> as point
-typedef complex<double> point;
 int cmp(const point &a, const point &b) { int t = cmp(real(a), real(b)); return t ? t : cmp(imag(a), imag(b));}
 bool operator<(const point &a, const point &b) { return cmp(a,b)<0;}
 double dot(const point &a, const point &b) { return real(b*conj(a));}
