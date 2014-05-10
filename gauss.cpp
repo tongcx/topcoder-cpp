@@ -2,16 +2,28 @@
 
 int inv(int a, int p) { return a == 1 ? 1 : ll(p-p/a) * inv(p%a, p) % p;}
 
-// LinSys with m eqs and n vars on Z(p)
+// LinSys with n vars on Z(p)
 // Use A[i][n] as constant term
 struct LinSystem {
-  int m, n, p, rank;
+  int n, p, rank;
   vector<vi> A;
 
-  LinSystem(int m, int n, int p) : m(m), n(n), p(p), A(m, vi(n+1)) {}
+  LinSystem(int n, int p) : n(n), p(p) {}
+
+  // Add one constraint, where the vector contains
+  // the coefficients of the constraint. Size should
+  // be n+1, and the last one is constant term.
+  void add_constr(vi& constr) {
+    A.push_back(constr);
+  }
+
   inline int reg(int x) { return mod(x, p);}
 
+  // Try to solve this linear system, will return
+  // whether the system is feasible. If feasible,
+  // can find out rank by accessing `rank`
   bool solve() {
+    int m = A.size();
     REP(i, m) REP(j, n+1) A[i][j] = reg(A[i][j]);
     rank = 0;
     REP(j, n) {
