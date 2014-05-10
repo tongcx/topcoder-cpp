@@ -33,3 +33,4 @@ template<class C, class=typename _cprint<C>::type> ostream& operator<<(ostream& 
 template<class C> inline void chmax(C& x, const C& a) { if (x < a) x = a;}
 template<class C> inline void chmin(C& x, const C& a) { if (x > a) x = a;}
 template<class C> inline C mod(C a, C b) { return (a%b+b)%b;}
+int inv(int a, int p) { return a == 1 ? 1 : ll(p-p/a) * inv(p%a, p) % p;}

@@ -1,7 +1,5 @@
 #include "header.cpp"
 
-int inv(int a, int p) { return a == 1 ? 1 : ll(p-p/a) * inv(p%a, p) % p;}
-
 // LinSys with n vars on Z(p)
 // Use A[i][n] as constant term
 struct LinSystem {
