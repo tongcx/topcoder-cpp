@@ -1,21 +1,63 @@
 #include "header.cpp"
 
 struct Graph {
-  int n;
-  vi dest, depth;  // use SZ(dest) as nar
-  vector<vi> adj;
+  /**
+   * Create graph with size n
+   */
+  Graph(int n):n(n),adj(n) {}
 
-  Graph(int n):n(n) {adj.resize(n);}
-  int inv(int a) { return a ^ 0x1; }
-
+  /**
+   * Add undirected edge from i to j
+   */
   int arc(int i, int j) {
     dest.PB(j); adj[i].PB(SZ(dest)-1);
     dest.PB(i); adj[j].PB(SZ(dest)-1);
     return SZ(dest)-2;
   }
 
-  // Bridges and articulation points - O(n+m)
+  /**
+   * Compute bridges and articulation points - O(n+m)
+   *
+   * Access artp and bridge for results.
+   */
   vector<bool> artp, bridge;
+  void partponte() {
+    artp = vector<bool>(n, false);
+    bridge = vector<bool>(SZ(dest), false);
+    depth = vi(n, -1);
+    least = vi(n, -1);
+    REP(i, n) if (depth[i] == -1) {
+        least[i] = depth[i] = 0;
+        if (dfs_artpbridge(i, -1) < 2) artp[i] = false;
+    }
+  }
+
+  /**
+   * Strongly Connected Components - O(n+m)
+   * see rep for results. rep[u] will be the
+   * representative for node u.
+   */
+  vi rep;
+  void compfortcon() {
+    depth = vi(n, -1);
+    ord.clear();
+    REP(u, n) if (depth[u] == -1) {
+        depth[u] = 0;
+        dfs_topsort(u);
+    }
+
+    rep = vi(n, -1);
+    for (int i = n-1; i >= 0; i--) if (rep[ord[i]] == -1)
+      dfs_compfortcon(ord[i], ord[i]);
+  }
+
+  private:
+  int n;
+  vi dest, depth;  // use SZ(dest) as nar
+  vector<vi> adj;
+
+  int inv(int a) { return a ^ 0x1; }
+
   vi least;
 
   int dfs_artpbridge(int u, int ent) {
@@ -36,21 +78,7 @@ struct Graph {
     return nf;
   }
 
-  void partponte() {
-    artp = vector<bool>(n, false);
-    bridge = vector<bool>(SZ(dest), false);
-    depth = vi(n, -1);
-    least = vi(n, -1);
-    REP(i, n) if (depth[i] == -1) {
-        least[i] = depth[i] = 0;
-        if (dfs_artpbridge(i, -1) < 2) artp[i] = false;
-    }
-  }
-
-  // Strongly Connected Components - O(n+m)
-  // see [rep] for results
-
-  vi ord, rep;
+  vi ord;
 
   int transp(int a) { return (a & 0x1); }
 
@@ -73,16 +101,4 @@ struct Graph {
     }
   }
 
-  void compfortcon() {
-    depth = vi(n, -1);
-    ord.clear();
-    REP(u, n) if (depth[u] == -1) {
-        depth[u] = 0;
-        dfs_topsort(u);
-    }
-
-    rep = vi(n, -1);
-    for (int i = n-1; i >= 0; i--) if (rep[ord[i]] == -1)
-      dfs_compfortcon(ord[i], ord[i]);
-  }
 };
