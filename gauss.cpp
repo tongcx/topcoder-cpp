@@ -21,7 +21,7 @@ struct LinSystem {
   // whether the system is feasible. If feasible,
   // can find out rank by accessing `rank`
   bool solve() {
-    int m = A.size();
+    int m = SZ(A);
     REP(i, m) REP(j, n+1) A[i][j] = reg(A[i][j]);
     rank = 0;
     REP(j, n) {

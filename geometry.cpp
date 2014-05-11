@@ -59,7 +59,7 @@ point line_intersect(point p, point q, point r, point s) {
 
 // return 1 if inside, 0 outside, -1 on a edge
 int in_poly(point p, const vector<point> &T) {
-  double a = 0; int N = T.size();
+  double a = 0; int N = SZ(T);
   for (int i = 0; i < N; i++) {
     if (between(T[i], T[(i+1) % N], p)) return -1;
     a += angle(T[i], p, T[(i+1) % N]);
