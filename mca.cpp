@@ -1,20 +1,36 @@
 #include "header.cpp"
 
-// Min Cost Arborescence - Edmond's Algorithm O(mn)
-// C is the final cost, set to -1 if no solution
-// all arcs with cc = 0 is the solution
 struct MCA {
-  int n, m;
-  vi src, dest, cost;
-  vi cc, rep, pi, mm, color;
-  int C, r;
-
+  /**
+   * Create graph with n nodes
+   */
   MCA(int n):n(n), m(0) {}
 
+  /**
+   * Add arc from i to j with cost c
+   */
   void arc(int i, int j, int c) {
     src.PB(i); dest.PB(j); cost.PB(c);
     m++;
   }
+
+  /**
+   * Compute Min Cost Arborescence with given root, Edmond's Algorithm O(mn)
+   * Return total cost or -1 if infeasible.
+   * All arcs with cc = 0 is the solution
+   */
+  vi cc;
+  int mca(int root) {
+    r = root; C = 0; cc = cost;
+    rep.clear(); REP(i, n) rep.PB(i);
+    while(iter());
+    return C;
+  }
+  private:
+  int C, r;
+  int n, m;
+  vi src, dest, cost;
+  vi rep, pi, mm, color;
 
   int cycle(int u) {
     if (color[u] == 1) return u;
@@ -54,12 +70,5 @@ struct MCA {
       }
     }
     return false;
-  }
-
-  int mca(int root) {
-    r = root; C = 0; cc = cost;
-    rep.clear(); REP(i, n) rep.PB(i);
-    while(iter());
-    return C;
   }
 };
