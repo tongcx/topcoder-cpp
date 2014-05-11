@@ -1,41 +1,31 @@
 #include "header.cpp"
 
-// LinSys with n vars on Z(p)
-// Use A[i][n] as constant term
-struct LinSystem {
-  int n, p, rank;
-  vector<vi> A;
-
-  LinSystem(int n, int p) : n(n), p(p) {}
-
-  // Add one constraint, where the vector contains
-  // the coefficients of the constraint. Size should
-  // be n+1, and the last one is constant term.
-  void add_constr(vi& constr) {
-    A.push_back(constr);
-  }
-
-  inline int reg(int x) { return mod(x, p);}
-
-  // Try to solve this linear system, will return
-  // whether the system is feasible. If feasible,
-  // can find out rank by accessing `rank`
-  bool solve() {
-    int m = SZ(A);
-    REP(i, m) REP(j, n+1) A[i][j] = reg(A[i][j]);
-    rank = 0;
-    REP(j, n) {
-      for (int i = rank; i < m; i++) if (A[i][j] != 0) {
-        swap(A[i], A[rank]);
-        break;
-      }
-      if (A[rank][j] == 0) continue;
-      for (int l = n; l >= j; l--) A[rank][l] = reg(A[rank][l]*inv(A[rank][j], p));
-      for (int i = rank+1; i < m; i++) for (int l = n; l >= j; l--)
-        A[i][l] = reg(A[i][l]-A[rank][l] * A[i][j]);
-      rank++;
+/**
+ * Gaussian elimination on field Z(p)
+ *
+ * @param A The matrix, each element is a row where
+ * the last element is constant term. This will be
+ * modified by the algorithm to upper triangular.
+ * @param p A prime
+ * @return -1 if infeasible, and rank of the system
+ * otherwise.
+ */
+int solve(vector<vi>& A, int p) {
+  int m = SZ(A);
+  int n = SZ(A[0])-1;
+  int rank = 0;
+  REP(i, m) REP(j, n+1) A[i][j] = mod(A[i][j], p);
+  REP(j, n) {
+    for (int i = rank; i < m; i++) if (A[i][j] != 0) {
+      swap(A[i], A[rank]);
+      break;
     }
-    for (int i = rank; i < m; i++) if (A[i][n] != 0) return false;
-    return true;
+    if (A[rank][j] == 0) continue;
+    for (int l = n; l >= j; l--) A[rank][l] = mod(A[rank][l]*inv(A[rank][j], p), p);
+    for (int i = rank+1; i < m; i++) for (int l = n; l >= j; l--)
+      A[i][l] = mod(A[i][l]-A[rank][l] * A[i][j], p);
+    rank++;
   }
-};
+  for (int i = rank; i < m; i++) if (A[i][n] != 0) return -1;
+  return rank;
+}

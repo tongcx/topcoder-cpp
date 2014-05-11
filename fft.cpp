@@ -1,5 +1,13 @@
 #include "header.cpp"
 
+/**
+ * Return the result of FFT. Here x's size must be
+ * power of 2.
+ *
+ * @param x The coefficient vector
+ * @param invert Whether to invert rather than compute FFT
+ * @return The computed vector
+ */
 vector<point> fft(vector<point> x, bool invert) {
   // make sure size of x is power of 2
   int cnt = SZ(x);
@@ -32,6 +40,15 @@ vector<point> fft(vector<point> x, bool invert) {
   return x;
 }
 
+/**
+ * Compute the mulplication of two polynomials.
+ * We use vi to represent polynomial where ith
+ * element is the coefficient of ith power of x.
+ *
+ * @param a The first polynomial
+ * @param b The second polynomial
+ * @return The product of two polynomials
+ */
 vi poly_multiply(vi a, vi b) {
   int resultSize = SZ(a)+SZ(b)-1;
   int cnt = 1 << (33 - __builtin_clz(max(SZ(a), SZ(b)) - 1));
