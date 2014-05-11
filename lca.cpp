@@ -2,10 +2,15 @@
 
 //dynamic lca with addition
 struct LCA {
-  vector<vi> fa;
-  vi depth;
+  /**
+   * Create a tree with one node.
+   */
   LCA() : fa(1), depth(1) {}
 
+  /**
+   * Add a node with parent f. The node will have id
+   * equal to current size of the tree.
+   */
   void add(int f) {
     int u = SZ(depth);
     depth.push_back(depth[f]+1);
@@ -14,6 +19,9 @@ struct LCA {
     for (int i = 0; SZ(fa[f]) > i; fa[u].push_back(fa[f][i]), f = fa[f][i], i++);
   }
 
+  /**
+   * Compute the least common ancester of u and v
+   */
   int lca(int u, int v) {
     if (depth[u] > depth[v]) swap(u, v);
     if (depth[u] < depth[v])
@@ -25,8 +33,15 @@ struct LCA {
     return fa[u][0];
   }
 
+  /**
+   * Find the distance between u and v
+   */
   int dist(int u, int v) {
     int a = lca(u, v);
     return depth[u]-depth[a] + depth[v]-depth[a];
   }
+
+  private:
+  vector<vi> fa; // fa[u] is ancestor of depth 1, 2, 4, ... of u
+  vi depth;
 };
