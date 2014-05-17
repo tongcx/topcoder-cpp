@@ -23,3 +23,17 @@ namespace std { template<class K, class V> struct hash<pair<K,V>> {
     return seed;
   }
 };}
+
+/**
+ * Order an sequential container and output the
+ * ordered indexes instead of ordered values
+ */
+template<class C> vi order(C& c) {
+  vector<pair<typename C::value_type, int>> seq;
+  int cnt = 0;
+  for (auto x : c) seq.eb(x, cnt++);
+  sort(all(seq));
+  vi ret;
+  for (auto x : seq) ret.pb(x.second);
+  return ret;
+}

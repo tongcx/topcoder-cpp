@@ -12,10 +12,15 @@
 #include <complex>
 #include <cassert>
 #define rep(i, n) for (int i = 0; i < n; i++)
+#define irep(i, n) for (int i = n-1; i >= 0; i--)
+#define rep1(i, n) for (int i = 1; i <= n; i++)
+#define irep1(i, n) for (int i = n; i >= 1; i--)
 #define sz(c) int((c).size())
 #define mset(c, v) memset(c, v, sizeof(c))
 #define all(c) (c).begin(), (c).end()
 #define pb push_back
+#define eb emplace_back
+#define mp make_pair
 #define trace(x...) x
 #define print(x...) trace(fprintf(stderr, x))
 #define watch(x) trace({auto _VAL = (x); cerr << #x << " = " << _VAL << endl;})
