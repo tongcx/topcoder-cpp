@@ -10,7 +10,7 @@
  */
 vector<point> fft(vector<point> x, bool invert) {
   // make sure size of x is power of 2
-  int cnt = SZ(x);
+  int cnt = sz(x);
   assert(__builtin_popcount(cnt) == 1);
   for (int i = 1, j = 0; i < cnt; i++) {
     int bit = cnt >> 1;
@@ -27,7 +27,7 @@ vector<point> fft(vector<point> x, bool invert) {
     point wLen(cos(angle), sin(angle));
     for (int i = 0; i < cnt; i += len) {
       point w(1,0);
-      REP(j, halfLen) {
+      rep(j, halfLen) {
         auto u = x[i + j];
         auto v = x[i + j + halfLen] * w;
         x[i + j] = u + v;
@@ -36,7 +36,7 @@ vector<point> fft(vector<point> x, bool invert) {
       }
     }
   }
-  if (invert) REP(i, cnt) x[i] /= cnt;
+  if (invert) rep(i, cnt) x[i] /= cnt;
   return x;
 }
 
@@ -50,15 +50,15 @@ vector<point> fft(vector<point> x, bool invert) {
  * @return The product of two polynomials
  */
 vi poly_multiply(vi a, vi b) {
-  int resultSize = SZ(a)+SZ(b)-1;
-  int cnt = 1 << (33 - __builtin_clz(max(SZ(a), SZ(b)) - 1));
+  int resultSize = sz(a)+sz(b)-1;
+  int cnt = 1 << (33 - __builtin_clz(max(sz(a), sz(b)) - 1));
   a.resize(cnt), b.resize(cnt);
-  vector<point> aa(ALL(a)), bb(ALL(b));
+  vector<point> aa(all(a)), bb(all(b));
   aa = fft(aa, false), bb = fft(bb, false);
   vector<point> cc(cnt);
-  REP(i, cnt) cc[i] = aa[i] * bb[i];
+  rep(i, cnt) cc[i] = aa[i] * bb[i];
   cc = fft(cc, true);
   vi res(resultSize);
-  REP(i, resultSize) res[i] = round(real(cc[i]));
+  rep(i, resultSize) res[i] = round(real(cc[i]));
   return res;
 }

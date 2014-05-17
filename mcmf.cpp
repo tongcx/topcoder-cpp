@@ -28,9 +28,9 @@ class MCMF {
      * this arc.
      */
     int arc(int i, int j, int u, cost_type c = 0) {
-      dest.PB(j); adj[i].PB(SZ(dest)-1); cap.PB(u); cost.PB(c);
-      dest.PB(i); adj[j].PB(SZ(dest)-1); cap.PB(0); cost.PB(-c);
-      return SZ(dest)-2;
+      dest.pb(j); adj[i].pb(sz(dest)-1); cap.pb(u); cost.pb(c);
+      dest.pb(i); adj[j].pb(sz(dest)-1); cap.pb(0); cost.pb(-c);
+      return sz(dest)-2;
     }
 
     /**
@@ -38,8 +38,8 @@ class MCMF {
      * Return total cost.
      */
     cost_type mcmf(int ini, int end) {
-      flow = vi(SZ(dest)); F = C = 0; int U = 0;
-      REP(a, SZ(dest)) U = max(U, capres(a));
+      flow = vi(sz(dest)); F = C = 0; int U = 0;
+      rep(a, sz(dest)) U = max(U, capres(a));
       for (delta = U; delta > 0; delta /= 2) while (spfa(ini, end));
       return C;
     }
@@ -47,7 +47,7 @@ class MCMF {
   private:
     int n, delta;    // n is number of nodes
     vector<cost_type> cost;
-    vi dest, cap;  // use SZ(dest) as nar (including back arcs)
+    vi dest, cap;  // use sz(dest) as nar (including back arcs)
     vector<vi> adj;
 
     int inv(int a) { return a ^ 0x1; }

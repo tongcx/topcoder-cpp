@@ -11,14 +11,14 @@
 #include <iostream>
 #include <complex>
 #include <cassert>
-#define REP(i, n) for (int i = 0; i < n; i++)
-#define SZ(c) int((c).size())
-#define MSET(c, v) memset(c, v, sizeof(c))
-#define ALL(c) (c).begin(), (c).end()
-#define PB push_back
-#define TRACE(x...) x
-#define PRINT(x...) TRACE(fprintf(stderr, x))
-#define WATCH(x) TRACE({auto _VAL = (x); cerr << #x << " = " << _VAL << endl;})
+#define rep(i, n) for (int i = 0; i < n; i++)
+#define sz(c) int((c).size())
+#define mset(c, v) memset(c, v, sizeof(c))
+#define all(c) (c).begin(), (c).end()
+#define pb push_back
+#define trace(x...) x
+#define print(x...) trace(fprintf(stderr, x))
+#define watch(x) trace({auto _VAL = (x); cerr << #x << " = " << _VAL << endl;})
 using namespace std;
 using ll = long long;
 using vi = vector<int>;

@@ -10,9 +10,9 @@ struct Graph {
    * Add undirected edge from i to j
    */
   int arc(int i, int j) {
-    dest.PB(j); adj[i].PB(SZ(dest)-1);
-    dest.PB(i); adj[j].PB(SZ(dest)-1);
-    return SZ(dest)-2;
+    dest.pb(j); adj[i].pb(sz(dest)-1);
+    dest.pb(i); adj[j].pb(sz(dest)-1);
+    return sz(dest)-2;
   }
 
   /**
@@ -23,10 +23,10 @@ struct Graph {
   vector<bool> artp, bridge;
   void partponte() {
     artp = vector<bool>(n, false);
-    bridge = vector<bool>(SZ(dest), false);
+    bridge = vector<bool>(sz(dest), false);
     depth = vi(n, -1);
     least = vi(n, -1);
-    REP(i, n) if (depth[i] == -1) {
+    rep(i, n) if (depth[i] == -1) {
         least[i] = depth[i] = 0;
         if (dfs_artpbridge(i, -1) < 2) artp[i] = false;
     }
@@ -41,7 +41,7 @@ struct Graph {
   void compfortcon() {
     depth = vi(n, -1);
     ord.clear();
-    REP(u, n) if (depth[u] == -1) {
+    rep(u, n) if (depth[u] == -1) {
         depth[u] = 0;
         dfs_topsort(u);
     }
@@ -53,7 +53,7 @@ struct Graph {
 
   private:
   int n;
-  vi dest, depth;  // use SZ(dest) as nar
+  vi dest, depth;  // use sz(dest) as nar
   vector<vi> adj;
 
   int inv(int a) { return a ^ 0x1; }
@@ -90,7 +90,7 @@ struct Graph {
         dfs_topsort(v);
       }
     }
-    ord.PB(u);
+    ord.pb(u);
   }
 
   void dfs_compfortcon(int u, int ent) {
