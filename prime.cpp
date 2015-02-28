@@ -88,12 +88,3 @@ struct PrimeField {
     return z;
   }
 };
-
-int main() {
-  PrimeField pf(37);
-
-  vi x = {5, 7, 0, 1};
-  vi y = {10, 1, 0, 1};
-
-  watch(pf.idft(pf.multiply(pf.dft(x), pf.dft(y))));
-}
