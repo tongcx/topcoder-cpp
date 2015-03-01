@@ -26,14 +26,14 @@ inline void chmin(C& x, const D& a) {
 #define PRINT(x...) TRACE(fprintf(stderr, x))
 #define WATCH(x) TRACE({auto _VAL = (x); cerr << #x << " = " << _VAL << endl;})
 
-template<class C>
+template<class C, class=typename C::iterator>
 struct is_container {
   using type = void;
 };
 
 template<> struct is_container<string> {};
 
-template<class C, class=typename is_container<C>::iterator>
+template<class C, class=typename is_container<C>::type>
 ostream& operator<<(ostream& out, const C& v) {
   for (auto x : v) out << x << ' ';
   return out;
