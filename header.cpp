@@ -25,7 +25,6 @@ template<class C> inline void chmin(C& x, const C& a) { x = min(x, a);}
 #define MSET(c, v) memset(c, v, sizeof(c))
 using vl = vector<ll>;
 using vd = vector<double>;
-using point = complex<double>;
 const int INF = 0x3f3f3f3f;
 
 template<class C> inline C mod(C a, C b) { return (a%b+b)%b;}
