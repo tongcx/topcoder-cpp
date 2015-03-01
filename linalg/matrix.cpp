@@ -2,16 +2,15 @@
 #define MATRIX_CPP
 
 #include "../header.cpp"
-#include <valarray>
 
 template<class C>
 struct matrix {
   int n,m;
-  valarray<C> x;
+  vector<C> x;
 
-  matrix(int n, int m) : n(n), m(m), x(n*m) {}
-  matrix(valarray<C> v) : n(SZ(v)), m(1), x(v) {}
-  matrix(int n, int m, valarray<C> v) : n(n), m(m), x(v) {}
+  matrix(int n, int m, vector<C> v) : n(n), m(m), x(v) {}
+  matrix(int n, int m, const C& c = C()) : matrix(n, m, vector<C>(n*m, c) ) {}
+  matrix(vector<C> v) : matrix(SZ(v), 1, v) {}
 
   inline const C& operator()(int i, int j) const {
     return x[i*m + j];
@@ -23,20 +22,59 @@ struct matrix {
 
 template<class C>
 matrix<C> operator+(const matrix<C>& a, const matrix<C>& b) {
-  return matrix<C>(a.n, a.m, a.x + b.x);
+  vector<C> c;
+
+  REP(i, a.n * a.m)
+    c.push_back(a.x[i] + b.x[i]);
+
+  return matrix<C>(a.n, a.m, c);
 }
 
 template<class C>
 matrix<C> operator-(const matrix<C>& a, const matrix<C>& b) {
-  return matrix<C>(a.n, a.m, a.x - b.x);
+  vector<C> c;
+
+  REP(i, a.n * a.m)
+    c.push_back(a.x[i] - b.x[i]);
+
+  return matrix<C>(a.n, a.m, c);
+}
+
+template<class C>
+matrix<C> operator-(const matrix<C>& a) {
+  vector<C> c;
+
+  REP(i, a.n * a.m)
+    c.push_back(-a.x[i]);
+
+  return matrix<C>(a.n, a.m, c);
 }
 
 template<class C>
 matrix<C> operator*(const matrix<C>& a, const matrix<C>& b) {
-  matrix<C> ret(a.n, b.m);
-  REP(i, a.n) REP(j, b.m) REP(k, a.m)
-    ret(i, j) += a(i, k) * b(k, j);
-  return ret;
+  vector<C> c;
+
+  REP(i, a.n) REP(j, b.m) {
+    // in case C doesn't have default constructor
+    C t = a(i, a.m-1) * b(a.m-1, j);
+
+    REP(k, a.m - 1)
+      t += a(i, k) * b(k, j);
+
+    c.push_back(t);
+  }
+
+  return matrix<C>(a.n, b.m, c);
+}
+
+template<class C>
+bool operator==(const matrix<C>& a, const matrix<C>& b) {
+  return a.n == b.n && a.m == b.m && a.x == b.x;
+}
+
+template<class C>
+bool operator!=(const matrix<C>& a, const matrix<C>& b) {
+  return !(a == b);
 }
 
 template<class C>
@@ -44,19 +82,11 @@ ostream& operator<<(ostream &out, const matrix<C>& a) {
   out << endl;
   REP(i, a.n) {
     out << '|';
-    REP(j, a.m) out << a(i,j) << ' ';
-    out << "|\n";
+    REP(j, a.m - 1) out << a(i,j) << ' ';
+    out << a(i, a.m - 1) << "|\n";
   }
 
   return out;
-}
-
-#include "../number/finite_field.cpp"
-
-int main() {
-  matrix<FiniteField::element> a(2, 2);
-  WATCH(a);
-  WATCH(a*a);
 }
 
 #endif

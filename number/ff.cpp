@@ -15,7 +15,7 @@
 struct FF {
   int p, x;
 
-  FF(int p = 0, int x = 0) : p(p), x(x) {}
+  FF(int p, int x = 0) : p(p), x(x) {}
 };
 
 // When calling these operators, make sure
@@ -83,6 +83,14 @@ ostream& operator<<(ostream &out, const FF &n) {
   out << n.x;
 }
 
+vector<FF> ffvec(int p, const vi &v) {
+  vector<FF> ret;
+
+  for (auto x : v)
+    ret.emplace_back(p, x);
+
+  return ret;
+}
 
 FF find_generator(int p) {
   // return a generator of Zp
