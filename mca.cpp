@@ -10,7 +10,7 @@ struct MCA {
    * Add arc from i to j with cost c
    */
   void arc(int i, int j, int c) {
-    src.pb(i); dest.pb(j); cost.pb(c);
+    src.push_back(i); dest.push_back(j); cost.push_back(c);
     m++;
   }
 
@@ -22,7 +22,7 @@ struct MCA {
   vi cc;
   int mca(int root) {
     r = root; C = 0; cc = cost;
-    rep.clear(); rep(i, n) rep.pb(i);
+    REP.clear(); REP(i, n) REP.push_back(i);
     while(iter());
     return C;
   }
@@ -30,7 +30,7 @@ struct MCA {
   int C, r;
   int n, m;
   vi src, dest, cost;
-  vi rep, pi, mm, color;
+  vi REP, pi, mm, color;
 
   int cycle(int u) {
     if (color[u] == 1) return u;
@@ -42,30 +42,30 @@ struct MCA {
   }
 
   int findrep(int i) {
-    if (rep[i] == i) return i;
-    return rep[i] = findrep(rep[i]);
+    if (REP[i] == i) return i;
+    return REP[i] = findrep(REP[i]);
   }
 
   bool iter() {
     pi = vi(n); mm = vi(n, INF);
-    rep(i, m) {
+    REP(i, m) {
       int u = findrep(src[i]), v = findrep(dest[i]);
       if (u != v && mm[v] > cc[i]) { mm[v] = cc[i];pi[v] = u;}
     }
-    rep(i, n) if (findrep(i) == i && i != r) {
+    REP(i, n) if (findrep(i) == i && i != r) {
       if (mm[i] == INF) { C = -1; return false;}
       C += mm[i];
     }
-    rep(i, m) {
+    REP(i, m) {
       int u = findrep(src[i]), v = findrep(dest[i]);
       if (u != v) cc[i] -= mm[v];
     }
 
     color = vi(n, 0); color[r] = 2;
-    rep(i, n) if (findrep(i) == i) {
+    REP(i, n) if (findrep(i) == i) {
       int u = cycle(i);
       if (u != -1) {
-        for (int v = pi[u]; v != u; v = pi[v]) rep[v] = u;
+        for (int v = pi[u]; v != u; v = pi[v]) REP[v] = u;
         return true;
       }
     }

@@ -16,16 +16,16 @@ class MaxFlow {
      * id of this arc.
      */
     int arc(int i, int j, int u) {
-      dest.pb(j); adj[i].pb(sz(dest)-1); cap.pb(u);
-      dest.pb(i); adj[j].pb(sz(dest)-1); cap.pb(0);
-      return sz(dest)-2;
+      dest.push_back(j); adj[i].push_back(SZ(dest)-1); cap.push_back(u);
+      dest.push_back(i); adj[j].push_back(SZ(dest)-1); cap.push_back(0);
+      return SZ(dest)-2;
     }
 
     /**
      * Return maxflow from ini to end
      */
     int maxflow(int ini, int end) {
-      flow = vi(sz(dest));
+      flow = vi(SZ(dest));
       int F = 0;
       while (MFbfs(ini, end)) while (true) {
         int tmp = MFdfs(ini, end, INF);
@@ -39,7 +39,7 @@ class MaxFlow {
 
   private:
     int n;    // n is number of nodes
-    vi dest, cap, d, curAdj;// use sz(dest) as nar (including back arcs)
+    vi dest, cap, d, curAdj;// use SZ(dest) as nar (including back arcs)
     vector<vi> adj;
 
     int inv(int a) { return a ^ 0x1; }
@@ -63,7 +63,7 @@ class MaxFlow {
 
     int MFdfs(int u, int t, int f) {
       if (u == t) return f;
-      for(int &i = curAdj[u]; i < sz(adj[u]); ++i) {
+      for(int &i = curAdj[u]; i < SZ(adj[u]); ++i) {
         int ar = adj[u][i], v = dest[ar];
         if (d[v] != d[u]+1 || capres(ar) == 0) continue;
         int tmpF = MFdfs(v, t, min(f, capres(ar)));

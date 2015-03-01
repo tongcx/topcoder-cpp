@@ -12,11 +12,11 @@ struct LCA {
    * equal to current size of the tree.
    */
   void add(int f) {
-    int u = sz(depth);
+    int u = SZ(depth);
     depth.push_back(depth[f]+1);
     fa.push_back(vi());
     fa[u].push_back(f);
-    for (int i = 0; sz(fa[f]) > i; fa[u].push_back(fa[f][i]), f = fa[f][i], i++);
+    for (int i = 0; SZ(fa[f]) > i; fa[u].push_back(fa[f][i]), f = fa[f][i], i++);
   }
 
   /**
@@ -27,8 +27,8 @@ struct LCA {
     if (depth[u] < depth[v])
       while (depth[v] > depth[u]) v = fa[v][__builtin_ctz(depth[v]-depth[u])];
     if (u == v) return u;
-    for (int k = sz(fa[u])-1; k >= 0; k--)
-      if (k < sz(fa[u]) && fa[u][k] != fa[v][k])
+    for (int k = SZ(fa[u])-1; k >= 0; k--)
+      if (k < SZ(fa[u]) && fa[u][k] != fa[v][k])
         u = fa[u][k], v = fa[v][k];
     return fa[u][0];
   }

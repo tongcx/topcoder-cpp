@@ -33,14 +33,14 @@ double seg_distance(point p, point q, point r) {
 
 vector<point> convex_hull(const vector<point> &pts) {
   vector<point> poly(pts);
-  point p0 = *min_element(all(poly), [](const point &a, const point &b) {return a<b;});
-  sort(all(poly), [p0](const point &p, const point &q) {
+  point p0 = *min_element(ALL(poly), [](const point &a, const point &b) {return a<b;});
+  sort(ALL(poly), [p0](const point &p, const point &q) {
     point a = p-p0, b = q-p0;
     int t = cmp(a%b);
     return t?t>0:cmp(abs(a),abs(b))<0;
   });
   int k = 1;
-  for (int i = 1; i < sz(poly); i++) {
+  for (int i = 1; i < SZ(poly); i++) {
     while (k>1 && cmp((poly[k-2]-poly[k-1])%(poly[i]-poly[k-1]))>=0) k--;
     poly[k++] = poly[i];
   }
@@ -49,8 +49,8 @@ vector<point> convex_hull(const vector<point> &pts) {
 }
 
 double poly_area(const vector<point> &pts) {
-  double ans = 0; int n = sz(pts);
-  rep(i, n) ans += pts[i]%pts[(i+1)%n];
+  double ans = 0; int n = SZ(pts);
+  REP(i, n) ans += pts[i]%pts[(i+1)%n];
   return ans / 2;
 }
 
@@ -61,7 +61,7 @@ point line_intersect(point p, point q, point r, point s) {
 
 // return 1 if inside, 0 outside, -1 on a edge
 int in_poly(point p, const vector<point> &T) {
-  double a = 0; int N = sz(T);
+  double a = 0; int N = SZ(T);
   for (int i = 0; i < N; i++) {
     if (between(T[i], T[(i+1) % N], p)) return -1;
     a += angle(T[i], p, T[(i+1) % N]);

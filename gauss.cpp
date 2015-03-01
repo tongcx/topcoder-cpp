@@ -11,11 +11,11 @@
  * otherwise.
  */
 int solve(vector<vi>& A, int p) {
-  int m = sz(A);
-  int n = sz(A[0])-1;
+  int m = SZ(A);
+  int n = SZ(A[0])-1;
   int rank = 0;
-  rep(i, m) rep(j, n+1) A[i][j] = mod(A[i][j], p);
-  rep(j, n) {
+  REP(i, m) REP(j, n+1) A[i][j] = mod(A[i][j], p);
+  REP(j, n) {
     for (int i = rank; i < m; i++) if (A[i][j] != 0) {
       swap(A[i], A[rank]);
       break;

@@ -5,7 +5,7 @@ struct Nth {
   multiset<int> s, l;
   int n;
 
-  Nth(int n) : n(n) {rep(i, n) s.insert(INF); l.insert(INF);}
+  Nth(int n) : n(n) {REP(i, n) s.insert(INF); l.insert(INF);}
   void insert(int x) {
     s.insert(x);
     l.insert(*(--s.end()));

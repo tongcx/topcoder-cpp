@@ -74,7 +74,7 @@ struct RMQ {
 
 struct BIT {
   int n;
-  // val[u] is delta to all nodes in u, aux[u] is sum of subtree at u
+  // val[u] is delta to ALL nodes in u, aux[u] is sum of subtree at u
   vi val, aux;
 
   BIT(int N) {
