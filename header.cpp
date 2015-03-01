@@ -1,3 +1,6 @@
+#ifndef HEADER_CPP
+#define HEADER_CPP
+
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -45,3 +48,5 @@ ostream& operator<<(ostream& out, const pair<K,V>& v) {
   return out;
 }
 // CUT end
+
+#endif

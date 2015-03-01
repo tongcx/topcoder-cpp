@@ -18,7 +18,7 @@ inline C mod(C a, int b) {
   return (a%b + b) % b;
 }
 
-int inv(int a, int p) {
+int inv(int p, int a) {
   return a == 1 ? 1 :
     ll(p - p/a) * inv(p%a, p) % p;
 }
