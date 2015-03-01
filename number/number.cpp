@@ -42,3 +42,16 @@ void factorize(int n, vi &primes, vi &orders) {
     orders.push_back(1);
   }
 }
+
+// return all primes smaller than n
+vi eratosthenes(int n) {
+  vector<bool> mask(n);
+  vi ret;
+  for (int p = 2; p < n; p++) {
+    if (mask[p]) continue;
+    ret.push_back(p);
+    for (int x = 2*p; x < n; x += p)
+      mask[x] = true;
+  }
+  return ret;
+}
