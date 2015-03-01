@@ -31,21 +31,50 @@ FF operator-(const FF &a, const FF &b) {
   return FF(a.p, ((a.x - b.x) % a.p + a.p) % a.p);
 }
 
+FF operator-(const FF &a) {
+  return FF(a.p, (a.p - a.x) % a.p);
+}
+
 FF operator*(const FF &a, const FF &b) {
   return FF(a.p, (ll(a.x) * b.x) % a.p);
 }
 
+FF& operator*=(FF &a, const FF &b) {
+  a = a * b;
+  return a;
+}
+
+FF inv(const FF &a) {
+  return a.x == 1 ? a :
+    FF(a.p, a.p - a.p / a.x) * inv(FF(a.p, a.p%a.x));
+}
+
 FF operator/(const FF &a, const FF &b) {
-  return a * inv(b.p, b.x);
+  return a * inv(b);
 }
 
 bool operator==(const FF &a, const FF &b) {
   return a.x == b.x && a.p == b.p;
 }
 
+bool operator!=(const FF &a, const FF &b) {
+  return !(a == b);
+}
+
 FF pow(const FF &n, int k) {
   if (k == 0) return FF(n.p, 1);
   return pow(n*n, k / 2) * (k % 2 ? n : FF(n.p, 1));
+}
+
+// must use namespace std
+namespace std{
+  template<> struct hash<FF> {
+    hash<int> h;
+
+    size_t operator()(const FF& a) const {
+      return h(a.x);
+    }
+  };
 }
 
 ostream& operator<<(ostream &out, const FF &n) {

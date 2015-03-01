@@ -1,3 +1,6 @@
+#ifndef NUMBER_CPP
+#define NUMBER_CPP
+
 #include "../header.cpp"
 
 // no need to worry about overflow, |x| <= |b| and |y| <= |a| is an invariant
@@ -16,11 +19,6 @@ template<class I> I crt(I p, I a, I q, I b) {
 template<class C>
 inline C mod(C a, int b) {
   return (a%b + b) % b;
-}
-
-int inv(int p, int a) {
-  return a == 1 ? 1 :
-    ll(p - p/a) * inv(p%a, p) % p;
 }
 
 void factorize(int n, vi &primes, vi &orders) {
@@ -55,3 +53,5 @@ vi eratosthenes(int n) {
   }
   return ret;
 }
+
+#endif
