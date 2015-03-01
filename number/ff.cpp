@@ -33,6 +33,11 @@ FF operator-(const FF &a, const FF &b) {
   return FF(a.p, ((a.x - b.x) % a.p + a.p) % a.p);
 }
 
+FF& operator-=(FF &a, const FF &b) {
+  a = a - b;
+  return a;
+}
+
 FF operator-(const FF &a) {
   return FF(a.p, (a.p - a.x) % a.p);
 }
@@ -53,6 +58,11 @@ FF inv(const FF &a) {
 
 FF operator/(const FF &a, const FF &b) {
   return a * inv(b);
+}
+
+FF& operator/=(FF &a, const FF &b) {
+  a = a / b;
+  return a;
 }
 
 bool operator==(const FF &a, const FF &b) {

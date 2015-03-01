@@ -31,6 +31,12 @@ matrix<C> operator+(const matrix<C>& a, const matrix<C>& b) {
 }
 
 template<class C>
+matrix<C>& operator+=(matrix<C>& a, const matrix<C>& b) {
+  a = a + b;
+  return a;
+}
+
+template<class C>
 matrix<C> operator-(const matrix<C>& a, const matrix<C>& b) {
   vector<C> c;
 
@@ -38,6 +44,12 @@ matrix<C> operator-(const matrix<C>& a, const matrix<C>& b) {
     c.push_back(a.x[i] - b.x[i]);
 
   return matrix<C>(a.n, a.m, c);
+}
+
+template<class C>
+matrix<C>& operator-=(matrix<C>& a, const matrix<C>& b) {
+  a = a - b;
+  return a;
 }
 
 template<class C>
@@ -65,6 +77,12 @@ matrix<C> operator*(const matrix<C>& a, const matrix<C>& b) {
   }
 
   return matrix<C>(a.n, b.m, c);
+}
+
+template<class C>
+matrix<C>& operator*=(matrix<C>& a, const matrix<C>& b) {
+  a = a * b;
+  return a;
 }
 
 template<class C>

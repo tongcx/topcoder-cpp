@@ -8,4 +8,9 @@ TEST(matrix, basic) {
 
   EXPECT_EQ(matrix<FF>(2, 2, ffvec(7, {6, 4, 5, 0})), a + a);
   EXPECT_EQ(matrix<FF>(2, 2, ffvec(7, {0, 6, 4, 5})), a * a);
+
+  auto b = a;
+  REP(i, 5)
+    b *= a;
+  EXPECT_EQ(b, pow(a, 6));
 }

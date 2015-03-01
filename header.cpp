@@ -11,6 +11,8 @@
 using namespace std;
 using ll = long long;
 using vi = vector<int>;
+
+// CUT begin
 const int INF = 0x3f3f3f3f;
 
 template<class C, class D>
@@ -22,6 +24,24 @@ template<class C, class D>
 inline void chmin(C& x, const D& a) {
   if (x > a) x = a;
 }
+
+// k must be at least 1
+// since we don't know 0 of C
+template<class C>
+C pow(C a, int k) {
+  C ret = a;
+  k--;
+
+  for (int i = 1; i <= k; i <<= 1) {
+    if (k & i)
+      ret *= a;
+    a *= a;
+  }
+
+  return ret;
+}
+// CUT end
+
 
 // CUT begin
 #include <iostream>
