@@ -2,7 +2,7 @@
 #define FF_CPP
 
 #include <random>
-#include "number.cpp"
+#include "basic.cpp"
 
 // FiniteField element
 // Invariant: 0 <= x < p unless p == 0
