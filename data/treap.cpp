@@ -12,6 +12,11 @@ struct treap {
     int s;
     // priority
     int w;
+
+    ~node() {
+      if (l) delete l;
+      if (r) delete r;
+    }
   };
 
   default_random_engine gen;
@@ -21,6 +26,20 @@ struct treap {
 
   int _size(node* n) {
     return n ? n->s : 0;
+  }
+
+  ~treap() { delete root;}
+
+  node* _find(const C& v) {
+    node* n = root;
+
+    while (n) {
+      if (v < n->v) n = n->l;
+      else if (v > n->v) n = n->r;
+      else return n;
+    }
+
+    return nullptr;
   }
 
   node* _insert(const C& v) {
@@ -122,15 +141,7 @@ struct treap {
   }
 
   bool contain(const C& v) {
-    node* n = root;
-
-    while (n) {
-      if (v < n->v) n = n->l;
-      else if (v > n->v) n = n->r;
-      else return true;
-    }
-
-    return false;
+    return _find(v) != nullptr;
   }
 
   int size() {
